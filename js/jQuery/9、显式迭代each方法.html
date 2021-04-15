@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul,li{
+            list-style: none;
+        }
+        .box ul li{
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            line-height: 100px;
+            background-color: lightpink;
+            margin-right: 20px;
+            float: left;
+
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <ul>
+        <li>你看看你</li>
+        <li>你看看你</li>
+        <li>你看看你</li>
+        <li>你看看你</li>
+        <li>你看看你</li>
+        <li>你看看你</li>
+        <li>你看看你</li>
+        <li>你看看你</li>
+        <li>你看看你</li>
+        <li>你看看你</li>
+
+    </ul>
+</div>
+<script type="text/javascript" src="../js/jquery-3.5.1.js"></script>
+<script type="text/javascript" >
+    $(".box ul li").each(function (index,element){
+        $(this).css('opacity',(index + 1)/10);
+    })
+</script>
+</body>
+</html>

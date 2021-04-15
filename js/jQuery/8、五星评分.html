@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>五星评分</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+
+        }
+        ul,li{
+            list-style: none;
+        }
+        .comment{
+            font-size:40px;
+        }
+        .comment li{
+            float: left;
+            /*color: red;*/
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <ul class="comment">
+        <li>☆</li>
+        <li>☆</li>
+        <li>☆</li>
+        <li>☆</li>
+        <li>☆</li>
+    </ul>
+</div>
+<script type="text/javascript" src="../js/jquery-3.5.1.js"></script>
+<script type="text/javascript" >
+    let solid = '★';
+    let hollow = '☆';
+    $(".comment>li").on('mouseenter',function (){
+        $(this).text(solid).css('color','red').prevAll().text(solid).css('color','red');
+        $(this).nextAll().text(hollow);
+    }).on('click',function (){
+        //点击给当前li添加特殊属性，用来记录当前点击位置
+        $(this).attr('clicked','clicked').siblings().removeAttr('clicked');
+
+        //点击事件发生后，将鼠标移入事件解绑
+        $(".comment>li").off('mouseenter')
+    }).on('mouseleave',function (){
+        $(".comment>li").text(hollow).css('color','black');
+        //鼠标离开时使点击位置及点击位置之前的为实心星不变
+        $(".comment>li[clicked]").text(solid).css('color','red').prevAll().text(solid).css('color','red');
+    })
+</script>
+</body>
+</html>

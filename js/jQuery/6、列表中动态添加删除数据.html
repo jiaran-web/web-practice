@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>列表操作</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        a{
+            color: black;
+            text-decoration: none;
+        }
+
+        .box{
+            position: absolute;
+            width: 100%;
+            height: 100vh;
+        }
+        .box .tableBox{
+            position: absolute;
+            transform: translateY(-50%) translateX(-50%);
+            top: 50%;
+            left: 50%;
+        }
+        .box .tableBox .table{
+            border: 1px solid #000000;
+            border-collapse: collapse;
+            vertical-align: middle;
+            text-align: center;
+        }
+        .box .tableBox .table tr th{
+            background-color: #00BFFF;
+            color: #fff;
+        }
+        .box .tableBox .table tr th,td{
+            border: 1px solid #000000;
+        }
+        .box .tableBox .table tr th:nth-child(1),td:nth-child(1){
+            width: 100px;
+            height: 50px;
+        }
+        .box .tableBox .table tr th:nth-child(3),td:nth-child(3){
+            width: 100px;
+            height: 50px;
+        }
+        .box .tableBox .table tr th:nth-child(2),td:nth-child(2){
+            width: 300px;
+            height: 50px;
+        }
+        .box .tableBox .addBtn,.box .alertBox .submit{
+            width: 100px;
+            height: 30px;
+            margin-top: 20px;
+            background-color: #00BFFF;
+            color: white;
+            border: 0;
+            border-radius: 5px;
+            outline: none;
+        }
+        .box .alertBack{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,.3);
+            z-index: 10;
+            display: none;
+        }
+        .box .alertBox{
+            position: absolute;
+            width: 500px;
+            height: 300px;
+            background-color: white;
+            z-index: 20;
+            transform: translateY(-50%) translateX(-50%);
+            top: 50%;
+            left: 50%;
+            border-radius: 20px;
+            display: none;
+
+        }
+        .box .alertBox .addText{
+            position: relative;
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            font-size: 24px;
+        }
+        .box .alertBox .addText span{
+            position: absolute;
+            left: 0;
+            margin-left: 20px;
+        }
+        .box .alertBox .addText a{
+            position: absolute;
+            right: 0;
+            margin-right: 20px;
+        }
+        .box .alertBox .alertForm div input{
+            /*display: block;*/
+            width: 350px;
+            height: 30px;
+            margin: 30px auto 0;
+            /*margin-top: 30px;*/
+            outline: none;
+            font-size: 18px;
+        }
+        .box .alertBox .submit{
+            display: block;
+            margin: 50px auto 0;
+        }
+        .box .alertBox .alertForm div{
+            width: 450px;
+            height: 64px;
+            margin: 0 auto;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="tableBox">
+            <table class="table">
+                <tr class="tableTh">
+                    <th>课程名称</th>
+                    <th>开课学院</th>
+                    <th>操作</th>
+                </tr>
+                <tr>
+                    <td>HTML</td>
+                    <td>腾科教育</td>
+                    <td><a href="##">删除</a></td>
+                </tr>
+                <tr>
+                    <td>CSS</td>
+                    <td>腾科教育</td>
+                    <td><a href="##">删除</a></td>
+                </tr>
+                <tr>
+                    <td>JavaScript</td>
+                    <td>腾科教育</td>
+                    <td><a href="##">删除</a></td>
+                </tr>
+            </table>
+            <button class="addBtn">添加新数据</button>
+        </div>
+        <div class="alertBack">
+        </div>
+        <div class="alertBox">
+            <div class="addText">
+                <span>添加数据</span>
+                <a href="##">×</a>
+            </div>
+            <div class="alertForm">
+                <div>
+                    <span>课程名称</span>
+                    <input class="value1" type="text">
+                </div>
+                <div>
+                    <span>开课学院</span>
+                    <input class="value2" type="text">
+                </div>
+            </div>
+            <button class="submit">
+                提交
+            </button>
+        </div>
+    </div>
+<script type="text/javascript" src="../js/jquery-3.5.1.js"></script>
+<script type="text/javascript" >
+    $(".box .tableBox .table tr td a").click(function (){
+       $(this).parent('td').parent('tr').remove();
+    });
+    $(".box .tableBox .addBtn").click(function (){
+       $(".box .alertBack").css('display','block');
+       $(".box .alertBox").css('display','block');
+    });
+    $(".box .alertBox .addText a").click(function (){
+        $(".box .alertBack").css('display','none');
+        $(".box .alertBox").css('display','none');
+    });
+    $(".box .alertBox .submit").click(function (){
+       let className = $(".box .alertBox .alertForm div .value1").val();
+       let schoolName = $(".box .alertBox .alertForm div .value2").val();
+       console.log(className,schoolName);
+       let newTr = $('<tr>\n' +
+                       '<td>' + className + '</td>\n' +
+                       '<td>' + schoolName + '</td>\n' +
+                       '<td><a href="##" class="get">删除</a></td>\n' +
+                       '</tr>');
+       //给新添加的tr添加事件
+        newTr.find('.get').click(function (){
+            $(this).parent('td').parent('tr').remove();
+        });
+       $('.box .tableBox .table').append(newTr);
+        $(".box .alertBack").css('display','none');
+        $(".box .alertBox").css('display','none');
+    });
+</script>
+</body>
+</html>

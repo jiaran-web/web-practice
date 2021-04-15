@@ -1,0 +1,23 @@
+{
+  "id": "2249950",
+  "name": "lunbo",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "18406195",
+      "name": "arrow-right",
+      "font_class": "arrow-right",
+      "unicode": "e6f0",
+      "unicode_decimal": 59120
+    },
+    {
+      "icon_id": "18406198",
+      "name": "arrow-left",
+      "font_class": "arrow-left",
+      "unicode": "e6f1",
+      "unicode_decimal": 59121
+    }
+  ]
+}

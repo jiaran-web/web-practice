@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			ul,li{
+				list-style: none;
+			}
+			a{
+				text-decoration: none;
+			}
+			html,body{
+				/* 禁用系统滚动条 */
+				height: 100%;
+				overflow: hidden;
+			}
+			#wrapper{
+				position: relative;
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+			}
+			#wrapper .scrollWrapper{
+				width: 15px;
+				height: 100%;
+				position: absolute;
+				right: 0;
+				top: 0;
+				border-left: 1px solid gray;
+				border-right: 1px solid gray;
+			}
+			#wrapper .scrollWrapper .scrollIn{
+				position: absolute;
+				width: 15px;
+				height: 100px;
+				background-color: gray;
+				
+			}
+			#wrapper .content{
+				position: absolute;
+				top: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrapper">
+			<div class="scrollWrapper">
+				<div class="scrollIn"></div>
+			</div>
+			<div class="content"></div>
+		</div>
+		
+		<script type="text/javascript">
+			var scrollIn = document.querySelector('#wrapper .scrollWrapper .scrollIn');
+			var content = document.querySelector('#wrapper .content');
+			
+			for(var i = 0; i < 300; i++){
+				content.innerHTML += i + '<br>' ; 
+			}
+			
+			//计算滚动条的高度
+			//公式：滚动条高度/屏幕高度 = 屏幕高度/内容高度 = 滚动条移动距离/内容移动距离
+			var scale = document.documentElement.clientHeight /content.offsetHeight;
+			scrollIn.style.height = scale * document.documentElement.clientHeight + 'px';
+			
+			//给滚动条添加拖拽事件
+			scrollIn.onmousedown = function(event){//给目标元素添加鼠标按下事件，鼠标按下时做以下事情
+				event = event || window.event;
+
+				var scrollInTop = scrollIn.offsetTop;
+
+				var differY = event.clientY - scrollInTop;//目的是记录鼠标在目标元素中的位置
+				// console.log(x,y);
+				document.onmousemove = function(event){//在鼠标按下事件内添加上鼠标移动事件，鼠标移动时做以下事情
+					event = event || window.event;
+
+					var resY = event.clientY - differY;
+					
+					//拖拽元素临界值判定与限制，使元素不能被拖出视口
+					
+					
+					if(resY < 0){
+						//如果元素最终位置小于零则使其最终位置等于零
+						resY = 0;
+					}else if(resY > document.documentElement.clientHeight - scrollIn.offsetHeight){
+						//如果元素最终位置大于视口高度减去元素高度，则使其元素最终位置等于视口高度减去元素高度
+						resY = document.documentElement.clientHeight - scrollIn.offsetHeight;
+					}
+					
+					//将元素最终应该到达的位置的值赋值给元素，使元素实现拖拽的效果
+					scrollIn.style.top = resY + 'px';
+					
+					var contentTop = -resY / scale;//根据滚动条一定的距离计算内容应滚动多远 （ps：滚动条移动的方向与内容移动的方向是相反的）
+					content.style.top = contentTop + 'px';
+					
+					
+					
+				}
+				
+				//last but not least,很重要，不加这个松开鼠标左键元素依然跟随鼠标移动
+				document.onmouseup = function(){//给目标元素添加鼠标松开事件
+					document.onmousemove = document.onmouseup = null;//鼠标松开，释放鼠标移动事件，整个拖拽时间完成,onmouseup事件也要释放
+				}
+				
+				
+				//DOM0取消浏览器默认事件
+				return false;
+				
+				//DOM2取消浏览器默认事件
+				// event.preventDefault();
+				
+				// console.log(differX,differY);
+			}
+			
+			document.addEventListener('mousewheel',wheelScroll);//ie/chrome浏览器的滚轮事件添加方式，DOM2标准
+			document.addEventListener('DOMMouseScroll',wheelScroll);//firefox浏览器的滚轮事件添加方式，DOM2标准
+			
+			var flag = true;
+			var step = 0;
+			var a = 20;
+			function wheelScroll(event){
+				if(event.wheelDelta){
+					//非火狐浏览器
+					if(event.wheelDelta > 0){
+						//上滑
+						flag = true;
+						step = -a;
+					}else if(event.wheelDelta < 0){
+						//下滑
+						flag = false;
+						step = a;
+					}
+				}else{
+					//火狐浏览器
+					if(event.detail < 0){
+						// 上滑
+						flag = true;
+						step = -a;
+					}else if(event.detail > 0){
+						//下滑
+						flag = false;
+						step = a;
+					}
+				}
+				// console.log(flag,step);
+				
+				var wheelHeigh = scrollIn.offsetTop + step;//滚动条移动的距离
+				if(wheelHeigh < 0){//滚动条的临界值
+					wheelHeigh = 0;
+				}else if(wheelHeigh > document.documentElement.clientHeight - scrollIn.offsetHeight){
+					wheelHeigh = document.documentElement.clientHeight - scrollIn.offsetHeight;
+				}
+				scrollIn.style.top = wheelHeigh + 'px';
+				var contentWheelTop = -wheelHeigh / scale;//根据滚动条一定的距离计算内容应滚动多远 （ps：滚动条移动的方向与内容移动的方向是相反的）
+				content.style.top = contentWheelTop + 'px';
+			}
+		</script>
+	</body>
+</html>

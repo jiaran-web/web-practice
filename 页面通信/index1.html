@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>另一个页面</title>
+		<link rel="stylesheet" href="./css/tongyong.min.css">
+	</head>
+	<body>
+	<div class="box">
+		<div class="search">
+			<input type="text">
+			<button>搜索</button>
+			<ul class="history">
+				<li>
+
+				</li>
+			</ul>
+		</div>
+	</div>
+
+
+	<script type="text/javascript" >
+	    let inputNode = document.querySelector('input');
+	    let buttonNode = document.querySelector('button');
+
+	    window.addEventListener('storage',function (event){
+	    	inputNode.value = event.newValue;
+		})
+	</script>
+	</body>
+</html>

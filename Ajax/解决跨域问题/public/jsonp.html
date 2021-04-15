@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>跨域问题</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        button,h1,.showData{
+            margin-left: 10px;
+        }
+        .showData{
+            min-width: 200px;
+            max-width: 500px;
+            /*height: 200px;*/
+            border: 2px solid #808080;
+            border-radius: 10px;
+        }
+        .showData li{
+            border-bottom: 1px solid #777777;
+        }
+
+    </style>
+</head>
+<body>
+<button>点击发送</button>
+<h1>返回的数据</h1>
+<ul class="showData">
+
+</ul>
+
+<script type="text/javascript" >
+    let btn = document.querySelector('button');
+    let ulNode = document.querySelector('.showData');
+    btn.onclick = function () {
+    //    定义回调函数
+        window.getData = function (data) {//使getData成为全局变量，后端才能调用
+            console.log(data);//接收返回数据
+            for (let i = 0; i < data.length; i++){
+                let {name,age} = data[i];
+                console.log(name,age);
+                let liNodes = document.createElement('li');
+                liNodes.innerHTML = `姓名：${name},<br>年龄：${age}`;
+                ulNode.prepend(liNodes);
+
+
+            }
+        }
+    //   创建script标签
+        let script = document.createElement("script");
+    //    设置script的scr属性
+        script.src = 'http://localhost:3000/jsonp?callback=getData';
+    //    将script节点插入到body中
+        document.body.append(script);
+
+    }
+</script>
+</body>
+</html>

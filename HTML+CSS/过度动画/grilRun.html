@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .run{
+            height: 256px;
+            width: calc(1536px / 6);
+            margin: 0 auto;
+            box-shadow: 0 0 15px #333;
+            background-image: url("./img/bg3.png");
+            /*animation-name: grilRun;*/
+            /*animation-duration: 500ms;*/
+            /*animation-timing-function: steps(5,start);*/
+            /*animation-iteration-count: infinite;*/
+            animation: grilRun 500ms steps(6,end) infinite;
+        }
+        .run:hover{
+            animation-play-state: paused;
+        }
+        @keyframes grilRun {
+            0%{
+                background-position: 0 0;
+            }
+            100%{
+                background-position: -1536px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="run"></div>
+</body>
+</html>

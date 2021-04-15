@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<!--  -->
+		<script type="text/javascript">
+			var str = 'abcdr1234SDFr1WE';
+			console.log(str.charAt(6));//返回字符串中下标（索引）为6的字符
+			console.log(str.indexOf('r1'));//返回子串在原串中开始的位置,找不到返回-1
+			console.log(str.indexOf('r1',6));//返回子串在原串中开始的位置,第一个参数为子串，第二个参数为查找开始的位置，找不到返回-1
+			console.log(str.lastIndexOf('r1'));//从后向前查找，但返回的是从前往后找到这个子串的位置，找不到返回-1
+			console.log(str.lastIndexOf('r1',5));//第二个参数为从后向前数的位置
+			console.log(str.split(''));//以传递的参数为标志，将字符串转化为数组，作为参数的标志不再存在
+			console.log(str.substr(2,5));//抽取子串，第一个参数为开始位置，第二个参数为抽取的长度
+			
+			
+			var arr = [1,13,2,45,63,5,7,9,2];
+			var arr1 = [14,15,16];
+			console.log(arr.concat(11,[12,13],arr1));//拼接，参数可以是一个也可以是多个，可以是单独的也可以是数组.返回一个新的数组，不会改变原数组
+			console.log(arr.join(''));//把数组转为字符串，参数可指定用来拼接的字符，默认是“,”。不会改变原数组
+			console.log(arr.reverse());//翻转数组，返回原数组，会改变原数组；
+			console.log(arr.slice(1,5));//抽取两个位置之间的数组，第一个参数为起始位置，第二个参数未结束位置，包含起始位置但不包含结束位置
+			console.log(arr.sort(function(front,back){
+				return front - back;//表示从小到大排序，如果从大到小排要改为back - front;
+			}));//对数组元素进行排序，会改变原数组，返回改变后的原数组
+			console.log(arr.pop());//删除并返回数组的最后一个元素，会改变原数组
+			console.log(arr);
+			console.log(arr.push(64,65));//在数组末尾添加元素，可以不止一个，返回添加后数组的长度，会改变原数组
+			console.log(arr);
+			console.log(arr.unshift(0));//在数组前面添加元素，可以不止一个，返回添加后数组的长度，会改变原数组
+			console.log(arr);
+			console.log(arr.shift());//在数组前面删掉并返回一个元素，会改变原数组
+			console.log(arr);
+			console.log(arr.splice(2,1));//删   表示从位置2开始删除一个元素，返回由删除的元素组成的新数组，会改变原数组
+			console.log(arr);
+			console.log(arr.splice(2,0,'赵丽颖','ym'));//增   表示从位置2开始删除0个元素，增加赵丽颖、ym这两个元素，返回由删除的元素组成的新数组，以为没有删所以返回一个空数组，会改变原数组
+			console.log(arr);
+			console.log(arr.splice(2,2,'gyj','jr'));//改   表示从位置2开始删除两个元素，并增加gyj、jr两个元素，相当于将赵丽颖、ym改成了gyj、jr返回由删除的元素组成的新数组，会改变原数组
+			console.log(arr);
+			arr.forEach(function(item,index){//遍历数组的另一种方法，不会改变原数组
+				console.log(index,item)
+			});
+			console.log(arr.splice(2,2));
+			console.log(arr.map(function(item,index){//加工数组，不会改变原数组
+				return item*2;//如何加工
+			}));
+			console.log(arr.filter(function(item,index){//过滤数组，不会改变原数组
+				return item <= 10;//过滤条件
+			}));
+			
+			//练习题
+			//1、字符串反转，字符串用str
+			var strToArr = str.split('');//先将字符串转为数组
+			var res = strToArr.reverse();//将转化后的数组反转
+			var arrToStr = res.join('');//最后将反转的数组转为字符串
+			console.log(arrToStr);
+			console.log(str);
+			
+			
+			//2、打印字符串中出现字母最多的次数和索引位置
+			//思路：定义一个空的对象，然后遍历这个字符串，
+			// 		判断每次循环拿到的字符是否已经是对象中的属性了，如果是，则这个属性的值加1，如果不是则以这个字符为属性名在对象中建立一个新的属性，并赋值为1
+			//		同时判断对象中是否存在了以拿到的这个字符+arr为名的数组属性，如果有，将此时的i  push进这个数组中，以此记录每个相同字符出现的位置
+			//															   如果没有，则建立一个以拿到的这个字符+arr为名的数组属性，第一个值为此时的i
+			//		对象建立好之后，for in循环遍历次对象，得到最大值，及最大值对应的属性名相关的数组即此属性名在字符串中每次出现的位置
+			var str = 'a1a23a12a3a41a23a4511576a';
+			var obj = {};
+			for(var i = 0; i < str.length; i++){//按顺序一个一个的从字符串里取字符,分别给每个字符创建记录个数的属性及记录位置的数组属性
+				var charS = str[i];//将取得的字符赋值给charS
+				
+				// if(obj[charS]){//判断对象obj里是否有str[i]对应的属性//ps:通过变量调用属性的时候中括号里不加引号
+				// 	obj[charS]++;//有则此属性的值加1
+				// }else{
+				// 	obj[charS] = 1;//没有则用此时str[i]对应的字符创建一个新的属性，并赋值为1
+				// }
+				
+				obj[charS]?obj[charS]++:obj[charS] = 1;//上面的判断可改写为三目运算的形式
+				
+				if(obj[charS + 'arr']){//判断对象里是否有存放相应字符串位置的数组
+					obj[charS + 'arr'].push(i);//如果有则将当前位置i  push进此数组
+				}else{
+					obj[charS + 'arr'] = [i];//如果没有则建立此数组，并将当前位置i放入其中
+				}
+			}
+			var max = 0;
+			var resKey = '';
+			for(var key in obj){//遍历对象找到出现次数最多的字符，并且找到记录这个字符在字符串中出现的位置的数组
+				if(!(obj[key] instanceof Array)){//记录位置的数组不参与比较
+					if(obj[key] >= max){//max与记录字符出现次数的属性的值进行比较，大的值赋给max
+						max = obj[key];
+						resKey = key; //记录值最大的属性的名
+					}
+				}
+			}
+			console.log(obj);
+			console.log(max, obj[resKey + 'arr']);//输出最大出现次数及对应字符在字符串中出现的位置
+			
+			
+			
+			
+			
+			
+			
+			// var arr = [1,2,3,4,15];
+			// arr.forEach(function(item,index){
+			// 	console.log(index,item)
+			// });
+		</script>
+		
+	</body>
+</html>

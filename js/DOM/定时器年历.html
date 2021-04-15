@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<span></span>
+		
+		<script type="text/javascript">
+			var spanNode = document.querySelector('span');
+			
+			var timer = setInterval(function(){
+				var time = getDate();
+				spanNode.innerHTML = '现在是：' + time;
+			},1000);
+			
+			function getDate(){
+				var date = new Date();
+				var year = date.getFullYear();
+				var month = date.getMonth() + 1;
+				if(month < 10){
+					month = '0' + month;
+				}
+				var day = date.getDate();
+				if(day < 10){
+					day = '0' + day;
+				}
+				var h = date.getHours();
+				if(h < 10){
+					h = '0' + h;
+				}
+				var m = date.getMinutes();
+				if(m < 10){
+					m = '0' + m;
+				}
+				var s = date.getSeconds();
+				if(s < 10){
+					s = '0' + s;
+				}
+				var week = date.getDay();
+				
+				
+				var fullDate = year + '年' + month + '月' + day + '日 ' + h + ':' + m + ':' + s + ' 星期' + week;
+				return fullDate;
+				
+			}
+			
+		</script>
+	</body>
+</html>

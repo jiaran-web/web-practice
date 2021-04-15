@@ -1,0 +1,24 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<button type="button" disabled="disabled">同意协议(10s)</button>
+		<script type="text/javascript">
+			var btn = document.querySelector('button');
+			var num = 10;
+			var timer = setInterval(function(){
+				num--;
+				btn.innerHTML = '同意协议(' + num + 's)';
+				if(num == 0){
+					clearInterval(timer);
+					btn.disabled = false;
+					btn.innerHTML = '同意协议';
+				}
+			},1000);
+		</script>
+	</body>
+</html>

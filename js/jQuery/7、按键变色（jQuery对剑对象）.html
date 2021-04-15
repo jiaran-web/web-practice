@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>按键变色</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 500px;
+            margin: 50px auto 0;
+            text-align: center;
+            border: 1px solid #333333;
+            box-shadow: 0 0 10px #808080;
+        }
+        .box .content{
+            width: 500px;
+            height: 400px;
+            background-color: #00ffff;
+            text-align: center;
+            line-height: 400px;
+            font-weight: 600;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <h1>按键变色</h1>
+    <div class="content">
+        <span>当前按键对应的数值为：</span>
+        <span class="num"></span>
+    </div>
+</div>
+<script type="text/javascript" src="../js/jquery-3.5.1.js"></script>
+<script type="text/javascript" >
+    let code = $(".box .content .num");
+    let div = $(".box .content");
+    $(document).on('keydown',function (e){
+        console.log(e.keyCode);
+        switch (e.keyCode) {
+            case 82:
+                div.css('backgroundColor','red');
+                code.text('82');
+                break;
+            case 66:
+                div.css('backgroundColor','blue');
+                code.text('66');
+                break;
+            case 80:
+                div.css('backgroundColor','pink');
+                code.text('80');
+                break;
+            case 83:
+                div.css('backgroundColor','skyBlue');
+                code.text('83');
+                break;
+            default:
+                code.text('无效按键');
+        }
+    })
+</script>
+</body>
+</html>

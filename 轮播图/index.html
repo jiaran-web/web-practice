@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="./css/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="./css/style.css"/>
+	</head>
+	<body>
+		<div class="banner">
+			<ul class="bannerList clearfix">
+				<!-- 图片无缝链接循环切换需要在第一张图片前加一个最后一张图片，在最后一张图片后面加一个第一张图片 -->
+				<li>5<img src="./img/5.jpg" alt=""></li>
+				<li>1<img src="./img/1.jpg" alt=""></li>
+				<li>2<img src="./img/2.jpg" alt=""></li>
+				<li>3<img src="./img/3.jpg" alt=""></li>
+				<li>4<img src="./img/4.jpg" alt=""></li>
+				<li>5<img src="./img/5.jpg" alt=""></li>
+				<li>1<img src="./img/1.jpg" alt=""></li>
+			</ul>
+			<span class="left iconfont icon-arrow-left"> </span>
+			<span class="right iconfont icon-arrow-right"></span>
+			<ul class="iconList">
+				<li class="highLight"></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+		<script type="text/javascript">
+			window.onload = function(){
+				var banner = document.querySelector('.banner');
+				var imgChange = document.querySelector('.banner .bannerList');
+				var left = document.querySelector('.banner .left');
+				var right = document.querySelector('.banner .right');
+				var icon = document.querySelectorAll('.banner .iconList li');
+				var img = document.querySelectorAll('.banner .bannerList li');
+				
+				//将每张图片切换的过程分为若干布
+				var timeAll = 500;//一张图片完成切换所需要的总时间；
+				var stepTime = 20;//每一步所需要的时间，也就是循环定时器的时间
+				
+				var moveTimer = null;
+				var autoTimer = null;
+				var isMove = false;		//专门针对连续点击切换按钮出现bug问题
+				var autoMoveIndex = 1;		//自动轮播图片的下标
+				
+				imgChange.style.left = -500 + 'px';		//无缝衔接的需要，因为现在的第一张已经变成了新加的最后一张，所以一开始要使其整体左移一张图片的距离
+				
+				banner.onmouseenter = function(){//鼠标移入左右切换键出现
+					left.style.opacity = '1';
+					right.style.opacity = '1';
+					
+					clearInterval(autoTimer);		//鼠标移入自动轮播停止
+				};
+				banner.onmouseleave = function(){//鼠标移出左右切换键消失
+					left.style.opacity = '0';
+					right.style.opacity = '0';
+					
+					autoRun();		//鼠标移出自动轮播重启
+				};
+				
+				// for(var i = 0; i < icon.length; i++){//排他操作实现点击当前按钮变色
+				// 	icon[i].onclick = function(){
+				// 		for(var j = 0; j < icon.length; j++){
+				// 			icon[j].className = '';
+				// 		}
+				// 		this.className = 'highLight';
+				// 	}
+				// }
+				
+				//左右按钮点击事件
+				right.onclick = function(){
+					
+					move(true);
+					
+					
+				}
+				left.onclick = function(){
+					move(false);
+					
+				}
+				
+				function move(flag){
+					
+					//判断元素是否在移动
+					
+					//处理连续点击图片移动叠加的bug
+					if(isMove){
+						return;		//如果正在移动，再点击则不会再移动，直接返回，后面代码不再执行 
+					}
+					
+					isMove = true;		//每次点击isMove变为true
+					
+					setTimeout(function(){
+						isMove = false;		//过600ms（时间大于等于图片切换的时间）后变为false
+					},600)
+					
+					if(typeof flag == 'boolean'){
+						if(flag){
+							var dis = -500;	//点击一次元素要走的距离
+						}else{
+							var dis = 500;	//点击一次元素要走的距离
+						}
+					}else{
+						var dis = flag - imgChange.offsetLeft;	//点击小圆点对应要移动的距离，所以要减去相对于父元素左边的距离
+					}
+					
+					
+					
+					var lastDis = imgChange.offsetLeft + dis;		//求元素最终的位置
+					var step = dis/(timeAll/stepTime);		//求点击一次图片切换的过程中每一步走的距离
+					
+					moveTimer = setInterval(function(){		//用循环定时器来实现图片切换，每次循环是图片切换的一步
+						var leftMove = imgChange.offsetLeft + step;		//每次循环图片移动的距离
+						
+						
+						if(leftMove == lastDis){		//当移动的距离与要到达的元素的最终位置相等时
+							clearInterval(moveTimer);		//清除时钟，循环停止
+							
+							//加无缝衔接逻辑
+							if(leftMove == -3000){		//当图片切换为第五张图片后面的第一张时
+								leftMove = -500;		//立马跳到前面第一张图片
+							}else if(leftMove == 0){		//当图片切换到第一张图片前面的第五张图片时
+								leftMove = -2500;		//立马跳到后面的第五张图片
+							}
+						}
+						
+						imgChange.style.left = leftMove + 'px';
+					},stepTime);
+					
+					//小圆点跟随图片变色问题
+					var index = Math.abs(lastDis / 500) - 1;	//通过元素的最终位置来计算每张图片对应小圆点的下标
+					
+					//但是为了实现无缝循环切换而添加的两个图片是特殊的
+					//一个index值为负，一个index值为5，都不是小圆点数组的索引，所以需要另外判断 
+					if( index < 0){
+						index = 4;
+					}
+					if(index == 5){
+						index = 0;
+					}
+					for(var j = 0; j < icon.length; j++){
+						icon[j].className = '';
+					}
+					
+					icon[index].className = 'highLight';
+					
+					autoMoveIndex = index + 1;		//点击左右按钮时根据小圆点跟随图片下标变化更新自动轮播图的下标，使自动轮播与左右按钮点击事件同步
+													//鼠标移出后，从当前图片开始自动轮播
+					
+				}
+				
+				//小按钮点击图片切换
+				for(var i = 0; i < icon.length; i++){//排他操作实现点击当前按钮变色
+					icon[i].index = i;
+					icon[i].onclick = function(){
+						for(var j = 0; j < icon.length; j++){
+							icon[j].className = '';
+							move((this.index + 1) * -500);		//点击调用move函数，括号里计算小圆点对应图片的位置
+							
+							autoMoveIndex = this.index + 1;		//点击小按钮更新自动轮播图的下标，使自动轮播与小按钮点击事件同步，
+																//鼠标移出后，从当前图片开始自动轮播
+						}
+						this.className = 'highLight';  
+					}
+				}
+				
+				//自动轮播
+				//循环定时器
+				autoRun();
+				function autoRun(){
+					autoTimer = setInterval(function(){
+						autoMoveIndex++;
+						move(autoMoveIndex * -500);
+						if(autoMoveIndex == 6){
+							autoMoveIndex = 1;
+						}
+					},4000);
+				}
+				
+			}
+			
+			//轮播图的构造过程
+			//第一步：结构
+			//第二步：css	外面小盒子根据图片宽度进行设置，		内部大盒子 宽度根据图片个数进行设置的
+			//第三步：js行为
+			
+						//1、点击按钮让图片先动起来（先设置一侧，如右边的），每次点击要走的距离都是一张图片的宽度的负数，这个过程需要循环定时器一步一步的走
+							//需要求每一步走的距离，元素起始位置可以获取到，结束位置也可以求出来
+						
+						//2、看什么时候元素停止，当刚好元素走到的位置和开始求出来的结束位置一样的时候，停止计时器
+						
+						//3、左边按钮和右边按钮几乎一致，只是点左边按钮的时候，元素走的距离就是一张图片的宽度，是正数，其他都不变，因此封装函数move(flag)
+						//	函数传参true就是点右侧按钮，false就是点左侧按钮
+						
+						//4、无缝操作 结构需要变化 在最前面加最后一张图片 在最后面加第一张图片；
+						//	在清除定时器的时候，去判断元素是否走到了第一张和最后一张的位置，如果走到，让元素瞬变到相应的位置
+						
+						//5、小圆点变色排他，关键点是求那一个小圆点变色，要拿到要变色小圆点的下标，通过元素最终位置去求
+						
+						//6、点击小圆点，图片移动对应位置，要传递元素准备移动到的最终位置，跟点击的小圆点的下标相关，move函数里的参数要根据类型进行判断
+						//	到底是点的按钮还是点的小圆点，因为传过来的参数不同
+						
+						//7、自动轮播， 根据图片下标进行move  传的参数也是元素准备移动到的最终位置，下表需要进行判断，为6 变回1
+						
+						//8、自动轮播和鼠标行为的同步  鼠标移入清除自动轮播 移出重启自动轮播（通过封装函数实现）
+						
+						//9、移入之后，鼠标点击按钮或小圆点 都要把自动轮播的下标值进行更新，否则不会同步
+		</script>
+	</body>
+</html>

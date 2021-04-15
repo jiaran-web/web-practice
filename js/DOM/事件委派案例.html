@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<table>
+			<tr>
+				<th>姓名</th>
+				<th>年龄</th>
+				<th>性别</th>
+				<th>操作</th>
+			</tr>
+			<tr>
+				<td>赵丽颖</td>
+				<td>21</td>
+				<td>女</td>
+				<td><a href="javascript:;">删除</a></td>
+			</tr>
+			<tr>
+				<td>赵丽颖</td>
+				<td>22</td>
+				<td>女</td>
+				<td><a href="javascript:;">删除</a></td>
+			</tr>
+			<tr>
+				<td>赵丽颖</td>
+				<td>23</td>
+				<td>女</td>
+				<td><a href="javascript:;">删除</a></td>
+			</tr>
+			
+			
+		</table>
+		
+		
+		<input type="text" placeholder="请输入姓名">
+		<br>
+		<input type="text" placeholder="请输入年龄">
+		<br>
+		<input type="text" placeholder="请输入性别">
+		<br>
+		<input type="button" value="添加">
+		
+		<script type="text/javascript">
+			var btnNode = document.querySelector('input[type="button"]');
+			var inputNode = document.querySelectorAll('input[type="text"]');
+			var tbody = document.querySelector('table tbody');
+			
+			btnNode.addEventListener('click', function(){//点击添加操作
+				var name = inputNode[0].value;
+				var age = inputNode[1].value;
+				var gender = inputNode[2].value;
+				
+				if(name.trim() && age.trim() && gender.trim()){
+					var trNode = document.createElement('tr');
+					
+					var tdName = document.createElement('td');
+					tdName.innerText = name;
+					trNode.appendChild(tdName);
+					
+					var tdAge = document.createElement('td');
+					tdAge.innerText = age;
+					trNode.appendChild(tdAge);
+					
+					var tdGender = document.createElement('td');
+					tdGender.innerText = gender;
+					trNode.appendChild(tdGender);
+					
+					var tdOpera = document.createElement('td');
+					tdOpera.innerHTML = '<a href="javascript:;">删除</a>';
+					trNode.appendChild(tdOpera);
+					
+					tbody.appendChild(trNode);
+				}else{
+					alert('请填写正确的姓名、年龄、性别！')
+				}
+				
+				inputNode[0].value = '';
+				inputNode[1].value = '';
+				inputNode[2].value = '';
+			});
+			
+			//事件委派：点击删除删去整行
+			tbody.addEventListener('click',function(event){
+				event = event || document.event;
+				var aNode = event.target || event.srcElement;//找到事件源，即要点击的那个元素
+				var delTr = aNode.parentElement.parentElement;//找到要达成目的地元素，在此处为事件源的祖先元素
+				tbody.removeChild(delTr);//删除
+			})
+			
+		</script>
+	</body>
+</html>

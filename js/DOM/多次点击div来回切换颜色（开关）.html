@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			div{
+				width: 200px;
+				height: 200px;
+				background-color: #00BFFF;
+				margin: 200px auto 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div></div>
+		<script type="text/javascript">
+			//计数法
+			// var divNode = document.querySelector('div');
+			// var num = 0;
+			// divNode.onclick = function(){
+			// 	num++;
+			// 	if(num%2 != 0){
+			// 		this.style.backgroundColor = 'hotpink';
+			// 	}else{
+			// 		this.style.backgroundColor = '#00BFFF';
+			// 	}
+			// }
+			
+			
+			//设置标记flag法
+			var divNode = document.querySelector('div');
+			var flag = true;
+			divNode.onclick = function(){
+				
+				if(flag){
+					this.style.backgroundColor = 'hotpink';
+					//flag = false;//执行完flag为true的语句使flag变为false，下一次点击执行else里的语句
+				}else{
+					this.style.backgroundColor = '#00BFFF';
+					//flag = true;//执行完flag为false的语句使flag变为true，下一次点击执行if里的语句
+				}
+				flag = !flag;//标志取反，相当于上面两条注释的结合
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//生成随机数
+			// function ranNum(min,max){
+			// 	return Math.floor(Math.random()*(max - min + 1)) + min;
+			// }
+			// var min = parseInt(prompt('请输入取值范围的最小值：'));
+			// var max = parseInt(prompt('请输入取值范围的最大值：'));
+			// var result = ranNum(min,max);
+			// console.log(result);
+			
+			
+			//随机生成验证码
+			//字符串也是有序的，所以字符串也有索引，可以和数组一样使用，而且也有长度
+			function verCode(num){
+				var str = 'QWERTYUIOPASDFGHJKLZXCVBNM1234567890qwertyuiopasdfghjklzxcvbnm';
+				var targetStr = '';
+				for(var i = 0; i < num; i++){
+					targetStr += str[Math.floor(Math.random() * str.length)];
+				}
+				return targetStr;
+			}
+			var num = parseInt(prompt('请问需要几位验证码？'));
+			console.log(verCode(num));
+		</script>
+	</body>
+</html>

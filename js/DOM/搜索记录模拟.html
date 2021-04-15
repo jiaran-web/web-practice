@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="./css/iconfont.css"/>
+		<style>
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			ul,li{
+				list-style: none;
+			}
+			.search{
+				width: 500px;
+				height: 500px;
+				margin: 100px auto 0;
+				box-shadow: 0 0 10px #333333;
+				overflow: hidden;
+				
+			}
+			.search .searchBox{
+				width: 300px;
+				height: 30px;
+				margin: 10px auto 0;
+				border: 1px solid #808080;
+				border-radius: 15px;
+			}
+			.search .searchBox input{
+				float: left;
+				width: 250px;
+				height: 30px;
+				outline: none;
+				font-size: 14px;
+				border-radius: 5px 0 0 5px;
+				border: none;
+				padding: 0 10px;
+				border-radius: 15px 0 0 15px ;
+			}
+			.search .searchBox button{
+				float: left;
+				width: 30px;
+				height: 30px;
+				border: none;
+				outline: none;
+				background-color: #FFFFFF;
+				border-radius: 0 15px 15px 0;
+			} 
+			.search .searchHistory{
+				width: 100%;
+				/* height: 400px; */
+				overflow: hidden;
+			}
+			.search .searchHistory>li{
+				float: left;
+				max-width: 100px;
+				height: 30px;
+				padding: 0 15px;
+				border-radius: 15px;
+				background-color: rgba(0,255,255,1);
+				margin: 10px 5px 0px 5px;
+				text-align: center;
+				line-height: 30px;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+			.search .searchHistory li:nth-child(1){
+				float: none;
+				background-color: #FFFFFF;
+				font-weight: 600;
+				font-family: "microsoft yahei";
+				text-align: left;
+				padding: 0;
+				border-radius: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="search">
+			<div class="searchBox">
+				<input type="text" placeholder="请输入搜素内容.">
+				<button class="iconfont icon-sousuo"></button>
+			</div>
+			<ul class="searchHistory">
+				<li>历史搜索</li>
+				<!-- <li>12345</li>
+				<li>123</li> -->
+			</ul>
+			<ul>
+				<li>热门搜索</li>
+			</ul>
+		</div>
+		<script type="text/javascript">
+			var inputNode = document.querySelector('.search .searchBox input');
+			var ulNode = document.querySelector('.search .searchHistory');
+			var btnNode = document.querySelector('.search .searchBox button');
+			var liFirst = document.querySelector('.search .searchHistory li:nth-child(2)');
+			
+			
+			inputNode.onkeyup = function(event){
+				if(event.keyCode == 13){
+					// var value = inputNode.value;
+					// var liFirst = document.querySelector('.search .searchHistory li:nth-child(2)');
+					// //每次敲回车或点击搜索时获得ul中的第二个li（因为第一个为历史搜索）
+					
+					// if(value.trim()){//trim()作用是去掉字符串前后的空格
+					// 	var newLi = document.createElement('li');//创建新的li
+					// 	newLi.innerText = value; //将新建li的内容修改为搜索框中输入的值
+					// 	newLi.title = value;
+					// 	if(liFirst){//判断此时ul中是否有第二个li
+					// 		ulNode.insertBefore(newLi,liFirst);//如果有则将此时新建并修改内容的li插入到第二个li之前变成新的第二个li
+					// 	}else{
+					// 		ulNode.appendChild(newLi);//如果没有第二个li，则将此时新建并修改内容的li追加到ul中，直到出现第二个li
+					// 	}
+						
+					// }else{
+					// 	alert('请输入搜索内容！')
+					// }
+					// inputNode.value = '';
+					
+					inputFun();
+					
+				}
+			}
+			btnNode.onclick = inputFun;
+			// function(){
+			// 	var value = inputNode.value;
+			// 	var liFirst = document.querySelector('.search .searchHistory li:nth-child(2)');
+			// 	//每次敲回车或点击搜索时获得ul中的第二个li（因为第一个为历史搜索）
+				
+			// 	if(value.trim()){//trim()作用是去掉字符串前后的空格
+			// 		var newLi = document.createElement('li');//创建新的li
+			// 		newLi.innerText = value; //将新建li的内容修改为搜索框中输入的值
+			// 		newLi.title = value;
+			// 		if(liFirst){//判断此时ul中是否有第二个li
+			// 			ulNode.insertBefore(newLi,liFirst);//如果有则将此时新建并修改内容的li插入到第二个li之前变成新的第二个li
+			// 		}else{
+			// 			ulNode.appendChild(newLi);//如果没有第二个li，则将此时新建并修改内容的li追加到ul中，直到出现第二个li
+			// 		}
+					
+			// 	}else{
+			// 		alert('请输入搜索内容！')
+			// 	}
+			// 	inputNode.value = '';
+				
+			// }
+			
+			function inputFun(){//将两个事件中重复的代码封装，然后在键盘事件中调用，使点击事件指向此函数；
+				var value = inputNode.value;
+				var liFirst = document.querySelector('.search .searchHistory li:nth-child(2)');
+				//每次敲回车或点击搜索时获得ul中的第二个li（因为第一个为历史搜索）
+				
+				if(value.trim()){//trim()作用是去掉字符串前后的空格
+					var newLi = document.createElement('li');//创建新的li
+					newLi.innerText = value; //将新建li的内容修改为搜索框中输入的值
+					newLi.title = value;
+					if(liFirst){//判断此时ul中是否有第二个li
+						ulNode.insertBefore(newLi,liFirst);//如果有则将此时新建并修改内容的li插入到第二个li之前变成新的第二个li
+					}else{
+						ulNode.appendChild(newLi);//如果没有第二个li，则将此时新建并修改内容的li追加到ul中，直到出现第二个li
+					}
+					
+					newLi.onmouseenter = function(){
+						newLi.style.backgroundColor = 'rgba(0,255,255,.5)';
+					}
+					newLi.onmouseleave = function(){
+						newLi.style.backgroundColor = 'rgba(0,255,255,1)';
+					}
+					
+				}else{
+					alert('请输入搜索内容！');
+				}
+				inputNode.value = '';
+				
+			}
+			ulNode.onclick = function(event){//事件委派，点击li时其内容回到搜索框内
+				// event.stopPropagation();
+				var liNode = event.target;
+				inputNode.value = liNode.innerText;
+				// liNode.style.backgroundColor = 'rgba(0,255,255,.3)';
+				
+			}
+			// ulNode.onmouseout = function(event){
+			// 	// event.stopPropagation();
+			// 	var liNode = event.target;
+				
+			// 	liNode.style.backgroundColor = 'rgba(0,255,255,1)';
+				
+			// }
+		</script>
+	</body>
+</html>

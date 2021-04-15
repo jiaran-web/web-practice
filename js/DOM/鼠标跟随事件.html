@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			img{
+				position: absolute;
+				width: 50px;
+				height: 50px;
+				top: 0;
+				left: 0;
+			}
+			.fir{
+				z-index: 99;
+			}
+			.sec{
+				transition: 20ms;
+			}
+			.san{
+				transition: 40ms;
+			}
+			.si{
+				transition: 60ms;
+			}
+			.wu{
+				transition: 80ms;
+			}
+			.liu{
+				transition: 100ms;
+			}
+			.q1{
+				transition: 120ms;
+			}
+			.ba{
+				transition: 140ms;
+			}
+			.jiu{
+				transition: 160ms;
+			}
+			.shi{
+				transition: 180ms;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<img class="fir" src="./1.jpg" >
+		<img class="sec" src="1.jpg" >
+		<img class="san" src="1.jpg" >
+		<img class="si" src="1.jpg" >
+		<img class="wu" src="1.jpg" >
+		<img class="liu" src="1.jpg" >
+		<img class="q1" src="1.jpg" >
+		<img class="ba" src="1.jpg" >
+		<img class="jiu" src="1.jpg" >
+		<img class="shi" src="1.jpg" >
+		<img class="sec" src="1.jpg" >
+		<img class="sec" src="1.jpg" >
+		
+		<script type="text/javascript">
+			var img = document.querySelectorAll('img');
+			// var img2 = document.querySelector('.sec');
+			
+			document.onmousemove = function(event){//鼠标移动事件
+				event = event || window.event;
+				var left = event.clientX;
+				var top = event.clientY;
+				for(var i = 0; i < img.length; i++){
+					img[i].style.left = left + 'px';
+					img[i].style.top = top + 'px';
+				}
+				// img[1].style.left = left + 'px';
+				// img[1].style.top = top + 'px';
+				// img[2].style.left = left + 'px';
+				// img[2].style.top = top + 'px';
+				// img[3].style.left = left + 'px';
+				// img[3].style.top = top + 'px';
+				// img[4].style.left = left + 'px';
+				// img[4].style.top = top + 'px';
+				// img[5].style.left = left + 'px';
+				// img[5].style.top = top + 'px';
+				// img[6].style.left = left + 'px';
+				// img[6].style.top = top + 'px';
+				// img[7].style.left = left + 'px';
+				// img[7].style.top = top + 'px';
+				// img[8].style.left = left + 'px';
+				// img[8].style.top = top + 'px';
+				// img[9].style.left = left + 'px';
+				// img[9].style.top = top + 'px';
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<img src="../img/1.jpeg" id="img">
+		<a href="http://www.baidu.com" id="a">百度</a>
+		<br>
+		<input type="checkbox" id="xsel" checked="checked">
+		<br>
+		<button id="btn1">点击换图</button>
+		<br>
+		<button id="btn2">换网址</button>
+		<br>
+		<button id="btn3">勾选</button>
+		
+		
+		
+		<script type="text/javascript">
+			window.onload = function(){
+				var btn1 = document.getElementById('btn1');
+				var btn2 = document.getElementById('btn2');
+				var btn3 = document.getElementById('btn3');
+				var imgNode = document.getElementById('img');
+				var aNode = document.getElementById('a');
+				var inputNode = document.getElementById('xsel');
+				
+				btn1.onclick = function(){
+					imgNode.src = 'img/2.jpeg';
+				}
+				
+				btn2.onclick = function(){
+					aNode.href = 'http://www.taobao.com';
+				}
+				
+				btn3.onclick = function(){
+					inputNode.checked = false;
+				}
+				
+				//点击图片实现图片循环切换；
+				var srcArr = ['../img/1.jpeg','../img/2.jpeg'];//用数组存储图片路径
+				var num = 0;//距离点击次数
+				imgNode.onclick = function(){
+					num++;
+					imgNode.src = srcArr[num % srcArr.length];//实现点击循环的常用方式，这种取余方式结果总是在0~srcArr.length之间循环。
+					// console.log(num);
+				}
+				console.log(num);
+				
+			}
+		</script>
+	</body>
+</html>

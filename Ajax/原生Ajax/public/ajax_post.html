@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax的post请求</title>
+</head>
+<body>
+<h1>这是向js原生ajax求情服务器发送post请求的页面</h1>
+<button>点我发送请求</button>
+
+
+<script type="text/javascript" >
+    let button = document.querySelector('button')
+    button.onclick = function(){
+        //实例换一个XMLHttpRequest对象
+        let xhr = new  XMLHttpRequest()
+
+        //    绑定一个名为onreadystatechange事件监听
+        xhr.onreadystatechange = function () {
+            //    xhr对象本身有五种状态：0,1,2,3,4
+            if(xhr.readyState === 4 && xhr.status === 200){
+                console.log(xhr.response);
+            }
+        }
+        //    调用open方法
+        xhr.open('post','http://localhost:3000/ajax_post')
+
+        //ajax发送get请求与发送post请求的不同之处
+        //此句是设置post请求所特有的请头，若不设置服务器无法获得参数
+        xhr.setRequestHeader('content-Type','application/x-www-form-urlencoded')
+        //    调用send方法
+        xhr.send('name=kobe&age=18')
+    }
+</script>
+</body>
+</html>

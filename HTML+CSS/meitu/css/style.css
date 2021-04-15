@@ -1,0 +1,111 @@
+.topBarWrpper {
+  background-color: #000;
+}
+.topBar {
+  max-width: 1300px;
+  margin: 0 auto;
+  height: 48px;
+  padding: 0 20px;
+  background-color: #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 30px;
+}
+.topBar .topLeft {
+  height: 100%;
+  line-height: 48px;
+}
+.topBar .topLeft .leftMenu {
+  color: #fff;
+}
+.topBar .topLeft .leftMenu:hover ul {
+  display: block;
+}
+.topBar .topLogo {
+  width: 120px;
+  height: 30px;
+  background: url("../img/dff63979.sprites-index@2x.png");
+  background-size: 400px 400px;
+}
+.topBar .topRight .rightUser {
+  transition: opacity 0.6s;
+  color: #fff;
+}
+.topBar .topRight .rightUser:hover ul {
+  display: block;
+}
+.topBar .topRight .rightUser:hover {
+  opacity: 0.6;
+}
+.topBar > a {
+  color: #fff;
+  transition: opacity 0.6s;
+}
+.topBar > a:hover {
+  opacity: 0.6;
+}
+.menuList {
+  display: none;
+  position: absolute;
+  top: 48px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #000;
+  padding-top: 44px;
+}
+.menuList li {
+  display: flex;
+  margin: 0 40px;
+  color: #fff;
+  font-size: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+.menuList li a {
+  height: 48px;
+  line-height: 48px;
+  color: #fff;
+}
+.menuList li span {
+  padding-left: 15px;
+  line-height: 44px;
+  color: #fff;
+}
+.menuList li .iconfont {
+  font-size: 26px;
+}
+.iconfont {
+  font-size: 25px;
+}
+@media only screen and (min-width: 768px) {
+  .topLeft {
+    flex: auto;
+    order: 2;
+  }
+  .topLeft .leftMenu {
+    display: none;
+  }
+  .topLeft .menuList {
+    display: flex;
+    position: static;
+    margin: 0;
+    padding: 0;
+    justify-content: space-around;
+  }
+  .topLeft .menuList li {
+    margin: 0;
+    border: none;
+    line-height: 48px;
+  }
+  .topLeft .menuList span {
+    display: none;
+  }
+  .topLogo {
+    order: 1;
+  }
+  .topRight {
+    order: 3;
+  }
+}
+/*# sourceMappingURL=style.css.map */

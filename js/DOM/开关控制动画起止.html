@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			ul,li{
+				list-style: none;
+			}
+			.box{
+				width: 300px;
+				height: 300px;
+				margin: 100px auto;
+				/* background-color: red; */
+				/* padding: 75px 0; */
+				animation: move 3s linear  infinite;
+				
+			}
+			@keyframes move{
+				from{ transform: rotate(0);}
+				to{ transform: rotate(360deg);}
+			}
+			.box .animal{
+				overflow: hidden;
+			}
+			.box .animal li{
+				
+				float: left;
+				
+			}
+			.box .animal li:nth-child(1){
+				width: 150px;
+				height: 75px;
+				margin-top: 75px;
+				border-radius: 75px 75px 0 0;
+				background-color: #00BFFF;
+			}
+			.box .animal li:nth-child(2){
+				width: 75px;
+				height: 150px;
+				border-radius: 0 75px 75px 0;
+				background-color: hotpink;
+			}
+			.box .animal li:nth-child(3){
+				width: 75px;
+				height: 150px;
+				margin-left: 75px;
+				border-radius: 75px 0 0 75px;
+				background-color: greenyellow;
+			}
+			.box .animal li:nth-child(4){
+				width: 150px;
+				height: 75px;
+				border-radius: 0 0 75px 75px;
+				background-color: springgreen;
+			}
+			.btn{
+				width: 350px;
+				margin: 0 auto;
+				text-align: center;
+			}
+			.btn button{
+				width: 100px;
+				height: 30px;
+				border: none;
+				background-color: blue;
+				color: #fff;
+				outline: none;
+				border-radius: 5px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<ul class="animal">
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+		<div class="btn">
+			<button type="button">旋转</button>
+			<button type="button">停止</button>
+			<button type="button">反转</button>
+		</div>
+		<script type="text/javascript">
+			var btn = document.querySelectorAll('button');
+			var box = document.querySelector('.box');
+			
+			//两个按键控制
+			btn[0].addEventListener('click',function(){
+				box.style.animationPlayState = 'running';
+			});
+			btn[1].addEventListener('click',function(){
+				box.style.animationPlayState = 'paused';
+			});
+			 var flag = true;
+			 btn[2].addEventListener('click',function(){
+				 if(flag){
+					 box.style.animationDirection = 'reverse';
+				 }else{
+					 box.style.animationDirection = '';
+				 }
+				 flag = !flag
+			 });
+			
+			//一个按键控制
+			// var flag = true;
+			// btn[0].addEventListener('click',function(){
+			// 	if(flag){
+			// 		box.style.animationPlayState = 'paused';
+			// 	}else{
+			// 		box.style.animationPlayState = 'running';
+			// 	}
+			// 	flag = !flag;
+			// });
+		</script>
+	</body>
+</html>

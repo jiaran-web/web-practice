@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//水仙花数：一个三位数，每一位的三次方的和等于它本身。abc = a^3 + b^3 + c^3;
+			for(var i = 100; i < 999; i++){
+				var b = parseInt(i / 100);
+				var s = parseInt(i/10%10);
+				var g = i%10;
+				
+				if( i == b*b*b + s*s*s + g*g*g){
+					console.log(i);
+				}
+			}
+			
+			//打印100~200之间所有的素数
+			  //方法一：借助标志位(最佳方式)
+				for(var i = 100; i <= 200; i++){
+					var flag = true;//标志位，每次执行循环时重置。
+					for(var j = 2; j < i; j++){
+						if(i % j == 0){
+							flag = false;
+							break;
+						}
+					}
+					if(flag){
+						// console.log(i);
+					}
+				}
+			//方法二：计数法
+			
+			for(var i = 100; i <= 200; i++){
+				var num = 0; //用于计数,每次执行循环时重置。
+				for(var j = 1; j <= i; j++){
+					if(i % j == 0){
+						num++;
+						
+					}
+				}
+				if(num == 2){
+					console.log(i);
+				}
+			}
+			
+			
+			
+			//打印1~20的阶乘的和。
+			var factorial = 1;
+			var sum = 0;
+			for(var i = 1; i <= 20; i++){
+				var factorial = 1;//阶乘的结果每次循环需要重置
+				for(var j = 1; j <= i; j++){
+					factorial *= j;
+				}
+				sum += factorial;
+				console.log(factorial);
+				
+			}
+			console.log(sum);
+			
+			
+			//打印等腰三角形；
+			for(var i = 0 ; i <= 7; i++){
+				//打空格
+				for(var j = 0; j <= 6 - i; j++){
+					document.write("&nbsp;");
+				}
+				//打星号
+				for(var k = 0; k < 2*i + 1; k++){
+					
+					document.write("*")
+				}
+				document.write("<br />");
+			}
+			
+			//打印圣诞树
+			for(var i = 0 ; i <= 7; i++){
+				//打空格
+				for(var j = 0; j <= 6 - i; j++){
+					document.write("&nbsp;");
+				}
+				//打星号
+				for(var k = 0; k < 2*i + 1; k++){
+					
+					document.write("*")
+				}
+				document.write("<br />");
+			}
+			for(var i = 0 ; i <= 7; i++){
+				//打空格
+				for(var j = 0; j <= 6 - i; j++){
+					document.write("&nbsp;");
+				}
+				//打星号
+				for(var k = 0; k < 2*i + 1; k++){
+					
+					document.write("*")
+				}
+				document.write("<br />");
+			}
+		</script>
+	</body>
+</html>

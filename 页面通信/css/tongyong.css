@@ -1,0 +1,91 @@
+/*cssreset*/
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+li,
+input,
+button {
+  margin: 0px;
+  padding: 0px;
+  font: 14px "微软雅黑";
+}
+a {
+  text-decoration: none;
+  display: block;
+}
+li {
+  list-style: none;
+}
+img {
+  display: block;
+}
+/*清除浮动*/
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+/*主要部分 */
+.box {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  box-shadow: 0 0 10px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.box .search {
+  position: relative;
+  width: 280px;
+  height: 26px;
+  border: 1px solid #c3c3c3;
+  border-radius: 10px;
+  margin: 10px auto 0 ;
+}
+.box .search input {
+  float: left;
+  width: 210px;
+  height: 18px;
+  outline: none;
+  border: none;
+  border-radius: 10px 0 0 10px;
+  padding: 4px 10px;
+}
+.box .search button {
+  float: left;
+  width: 50px;
+  height: 26px;
+  outline: none;
+  box-sizing: content-box;
+  border: none;
+  border-radius: 0 10px 10px 0;
+  background-color: coral;
+}
+.box .history {
+  position: absolute;
+  left: 0;
+  top: 18px;
+  width: 279px;
+  height: 100px;
+  border: 1px solid #c3c3c3;
+  border-top: none;
+}
+/*# sourceMappingURL=tongyong.css.map */

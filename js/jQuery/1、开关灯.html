@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>开关灯</title>
+    <style>
+        div{
+            width: 500px;
+            height: 500px;
+            border: 2px solid #00BFFF;
+            box-shadow: 0 0 15px #808080;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <button>开灯</button>
+        <button>关灯</button>
+    </div>
+    <script type="text/javascript" src="../js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" >
+        let btn = $('button');
+        let div = $('div');
+        console.log(btn[0]);
+        btn[0].onclick = function (){
+            div.css('backgroundColor','rgba(255,255,255,1)');
+        };
+        btn[1].onclick = function (){
+            div.css('backgroundColor','rgba(0,0,0,.5)');
+        };
+    </script>
+</body>
+</html>

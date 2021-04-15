@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>下拉菜单</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul,li{
+            list-style: none;
+
+        }
+        .box{
+            width: 403px;
+            height: 433px;
+            border: 2px solid #000000;
+            box-shadow: 0 0 10px #333333;
+            margin: 10px auto 0;
+            overflow: hidden;
+        }
+        .box>ul{
+            width: 100%;
+            height: 30px;
+        }
+        .box>ul>i{
+            display: inline-block;
+            float: left;
+            height: 30px;
+            width: 1px;
+            background-color: grey;
+        }
+        .box>ul>li{
+            position: relative;
+            float: left;
+            width: 100px;
+            height: 30px;
+            background-color: #00BFFF;
+            text-align: center;
+            line-height: 30px;
+
+        }
+        .box>ul>li>ul{
+            position: absolute;
+            display: none;
+            color: black;
+            border-top: 2px solid #808080;
+            z-index: 99;
+
+        }
+        .highLight{
+            color: #fff;
+            background-color: #00ffff;
+            /*border-bottom: 2px solid #000;*/
+        }
+        .box>ul>li>ul>li{
+            height: 30px;
+            width: 100px;
+            background-color: #00BFFF;
+            text-align: center;
+            line-height: 30px;
+        }
+        .box .img img{
+            width: 403px;
+            height: 403px;
+        }
+        /*.box .img img:nth-child(1){*/
+        /*    display: none;*/
+        /*}*/
+    </style>
+</head>
+<body>
+<div class="box">
+    <ul>
+        <li class="highLight">
+            <span>标题1</span>
+            <ul>
+                <li>1下拉标题1</li>
+                <li>1下拉标题2</li>
+                <li>1下拉标题3</li>
+            </ul>
+        </li>
+        <i></i>
+        <li>
+            <span>标题2</span>
+            <ul>
+                <li>2下拉标题1</li>
+                <li>2下拉标题2</li>
+                <li>2下拉标题3</li>
+            </ul>
+        </li>
+        <i></i>
+        <li>
+            <span>标题3</span>
+            <ul>
+                <li>3下拉标题1</li>
+                <li>3下拉标题2</li>
+                <li>3下拉标题3</li>
+            </ul>
+        </li>
+        <i></i>
+        <li>
+            <span>标题4</span>
+            <ul>
+                <li>4下拉标题1</li>
+                <li>4下拉标题2</li>
+                <li>4下拉标题3</li>
+            </ul>
+        </li>
+
+    </ul>
+    <div class="img">
+        <img src="./img/1.jpg" alt="">
+        <img src="./img/2.jpg" alt="">
+        <img src="./img/3.jpg" alt="">
+        <img src="./img/4.jpg" alt="">
+    </div>
+</div>
+<script type="text/javascript" src="../js/jquery-3.5.1.minjs"></script>
+<script type="text/javascript" >
+    let navLis = $(".box>ul>li");
+    let dieUL = $(".box>ul");
+    let sunUL = $(".box>ul>li>ul");
+    let img = $(".box .img img");
+
+    navLis.mouseenter(function (){
+        let ins = $(this).index()/2;
+        // console.log(ins);
+
+        $(this).addClass('highLight').children('ul').slideDown(500).parent('li').siblings('li').removeClass('highLight').children('ul').slideUp(200);
+
+        img.eq(ins).fadeIn(200).siblings('img').fadeOut(200);
+
+    });
+    dieUL.mouseleave(function (){
+        navLis.removeClass('highLight').children('ul').css('display','none');
+        navLis.eq(0).addClass('highLight');
+        img.eq(0).css('display','block').siblings('img').css('display','none');
+    })
+</script>
+</body>
+</html>

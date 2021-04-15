@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>交换变量</title>
+</head>
+<body>
+
+
+<script>
+    //方法一 ： 定义第三个变量
+    var a=1;
+    var b=2;
+    var z;
+    z=a;
+    a=b;
+    b=z;
+
+    console.log(a);
+    console.log(b);
+    console.log(z);
+
+    //方法二： 求和的方式
+    var num1 = 10;
+    var num2 = 20;
+
+    num1 = num1 + num2;
+    num2 = num1 - num2;
+    num1 = num1 - num2;
+    console. log("num1=" + num1);
+    console. log("num2=" + num2);
+
+
+</script>
+</body>
+</html>

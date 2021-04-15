@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>城市选择</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+
+        }
+        ul,li{
+            list-style: none;
+        }
+        .box{
+            height: 500px;
+            width: 1000px;
+            margin: 0 auto;
+        }
+        #leftCity,#rightCity{
+            float: left;
+            height: 300px;
+            width: 300px;
+            background-color: #00BFFF;
+        }
+        #leftCity>option,#rightCity>option{
+            height: 30px;
+            font-size: 24px;
+            /*text-align: center;*/
+            line-height: 30px;
+        }
+        .btn{
+            float: left;
+            width: 70px;
+            text-align: center;
+        }
+        .btn>button{
+            display: block;
+            margin: 20px auto 0;
+            /*margin-left: 10px;*/
+
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <select name="city" id="leftCity" class="left" multiple>
+            <option value="0" selected>北京</option>
+            <option value="1">上海</option>
+            <option value="2">深圳</option>
+            <option value="3">杭州</option>
+            <option value="4">广州</option>
+        </select>
+        <div class="btn">
+            <button id="rightALl">全部右移</button>
+            <button id="leftALl">全部左移</button>
+            <button id="right">右移</button>
+            <button id="left">左移</button>
+        </div>
+        <select name="city" id="rightCity" class="right" multiple></select>
+    </div>
+<script type="text/javascript" src="../js/jquery-3.5.1.js"></script>
+<script type="text/javascript" >
+    let leftOption = document.querySelectorAll("#leftCity>option");
+    let rightOption = document.querySelectorAll("#rightCity>option");
+    $('#rightALl').click(function (){
+        $("#leftCity>option").appendTo($("#rightCity"));
+    });
+    $('#leftALl').click(function (){
+        $("#rightCity>option").appendTo($("#leftCity"));
+    });
+    $('#right').click(function (){
+        $("#leftCity>option:selected").appendTo($("#rightCity"));
+        // leftOption.selected = false;
+        // rightOption.selected = false;
+        // $("#rightCity>option").attr("selected","");
+    });
+    $('#left').click(function (){
+        $("#rightCity>option:selected").appendTo($("#leftCity"));
+        // leftOption.selected = false;
+        // rightOption.selected = false;
+    });
+</script>
+</body>
+</html>

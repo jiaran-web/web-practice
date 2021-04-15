@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div>12344556</div>
+		<script type="text/javascript">
+			
+			//封装一个函数事项对一个对象设置和读取内容，并考虑兼容性处理
+			function setOrGetContent(obj,content){
+				if(arguments.length == 2){
+					//设置内容
+					if(obj.textContent){//兼容性设置
+						//高级浏览器
+						obj.textContent = content;
+					}else{
+						//低级浏览器
+						obj.innerText = content;
+					}
+				}else{
+					//读取内容
+					var result = '';
+					if(obj.textContent){//兼容性设置
+						//高级浏览器
+						result = obj.textContent;
+					}else{
+						//低级浏览器
+						result = obj.innerText;
+					}
+					
+				}
+				return result;
+			}
+			var divNode = document.querySelector('div');
+			console.log(setOrGetContent(divNode));
+			console.log(setOrGetContent(divNode,'0judskfghjdhfuedfhrugkhdjf'));
+			console.log(setOrGetContent(divNode));
+		</script>
+	</body>
+</html>

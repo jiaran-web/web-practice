@@ -1,0 +1,61 @@
+.banner{
+	width: 500px;
+	height: 500px;
+	margin: 200px auto 0;
+	overflow: hidden;
+	position: relative;
+}
+.banner .bannerList{
+	position: absolute;
+	width: 3500px;
+	height: 500px;
+	left: 0;
+}
+.banner .bannerList li{
+	width: 500px;
+	height: 500px;
+	float: left;
+	transition: left 2s;
+}
+.banner .bannerList li img{
+	width: 500px;
+	height: 500px;
+}
+
+.banner .left,.banner .right{
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	top: 50%;
+	transform: translateY(-50%);
+	text-align: center;
+	line-height: 100px;
+	background-color: rgba(123,123,123,.5);
+	opacity: 0;
+	transition: opacity .5s;
+	
+}
+.banner .left{
+	left: 0;
+}
+.banner .right{
+	right: 0;
+}
+.banner .iconList{
+	position: absolute;
+	bottom: 10px;
+	left: 50%;
+	transform: translateX(-50%);
+	
+}
+.banner .iconList li{
+	float: left;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: rgba(0,0,0,.7);
+	margin: 0 5px;
+}
+.banner .iconList .highLight{
+	background-color: rgba(255,0,0,.7);
+}

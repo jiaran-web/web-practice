@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			
+			var arr = [8,2,6,1,3]
+			//数组求和
+			// var sum = 0;
+			// for(var i = 0; i < arr.length; i++){
+			// 	sum += arr[i];
+			// }
+			// console.log(sum);
+			
+			
+			
+			
+			//打印最大值
+			// var max = arr[0];
+			// var min = arr[0];
+			// var sum = 0;
+			// var average = 0;
+			// for(var i = 0; i < arr.length; i++){
+			// 	if(arr[i] > max){
+			// 		max = arr[i];
+			// 	}else if(arr[i] < min){
+			// 		min = arr[i];
+			// 	}
+			// 	sum += arr[i];
+			// 	average = sum / arr.length;
+			// }
+			
+			// console.log(max);
+			// console.log(min);
+			// console.log(average);
+			
+			
+			//输入五位同学的成绩，并打印平均成绩
+			// var arr1 = [];
+			// var sum = 0;
+			// var average = 0;
+			// for(var i = 0; i < 5;i++){
+			// 	arr1[i] = parseInt(prompt("请输入第" + (i+1) + "位同学的成绩"));
+			// 	sum += arr1[i];
+			// 	average = sum / arr1.length;
+			// }
+			// document.write("本班平均成绩为：" + average + "分");
+			
+			
+			
+			
+			
+			//反转数组
+			//方法一： 在原数组中进行
+			// var med = 0;
+			// for(var i = 0; i < arr.length/2; i++){
+			// 	med = arr[i];
+			// 	arr[i] = arr[arr.length - 1 - i];
+			// 	arr[arr.length - 1 - i] = med;
+			// 	console.log(arr);
+			// }
+			// console.log(arr);
+			
+			//方法二：建立一个新数组
+			// var newArr = [];//目前长度为0
+			// for(var i = arr.length-1; i >= 0; i--){
+			// 	newArr[newArr.length] = arr[i];//每次循环newArr的长度加一 
+			// }
+			// console.log(newArr);
+			
+			
+			//数组中偶数打印，奇数生成一个新的数组
+			// var newArr = [];//目前长度为0
+			
+			// for(var i = 0; i < arr.length; i++){
+			// 	if(arr[i]%2 == 0){
+			// 		console.log(arr[i]);
+			// 	}else{
+			// 		newArr[newArr.length] = arr[i];
+			// 	}
+			// }
+			// console.log(newArr);
+			
+			
+			//数组的数从小到大排列，输入一个数并插入到正确的位置
+			var arr1 = [10,20,30,40,50,60,70,80,90,100];
+			var num = parseInt(prompt("请输入一个100以内的数字"));
+			var index = 0;  //存储位置
+			
+			if(num < arr1[0]){
+				index = 0;
+				for(var j = arr1.length-1; j >= index; j--){
+					arr1[j+1] = arr1[j];
+				}
+				arr1[index] = num;
+			}else if(num > arr1[arr1.length - 1]){
+				index = arr1.length;
+				arr1[index] = num;
+			}else{
+			
+				for(var i = 0; i <arr1.length; i++){
+					if(num >= arr1[i] && num <= arr1[i+1]){
+						index = i +1;
+					}
+				}
+				for(var j = arr1.length-1; j >= index; j--){
+					arr1[j+1] = arr1[j];
+				}
+				arr1[index] = num;
+			}
+			console.log(arr1);
+		</script>
+	</body>
+</html>

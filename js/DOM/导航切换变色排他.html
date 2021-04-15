@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			ul,ol,li{
+				list-style: none;
+			}
+			a{
+				text-decoration: none;
+				color: #000;
+			}
+			.nav{
+				width: 400px;
+				margin: 0 auto;
+				/* border-bottom: 1px #333 solid; */
+			}
+			.nav .navTexts{
+				display: flex;
+				
+			}
+			.nav .navTexts li{
+				position: relative;
+				width: 100px;
+				height: 50px;
+				text-align: center;
+				line-height: 50px;
+			}
+			.nav .navTexts>li a{
+				display: block;
+				width: 100%;
+				height: 100%;
+			}
+			/* .navTexts li:nth-child(1){
+				background-color: deepskyblue;
+			} */
+			.highLight{
+				background-color: deepskyblue;
+				color: #fff;
+			}
+			.nav .navTexts>li .secMenu{
+				position: absolute;
+				width: 200px;
+				height: 0;
+				box-shadow: 0 0 3px #333333;
+				/* margin-top: 2px; */
+				left: -50px;
+				/* display: none; */
+				/* transition与diaplay是冲突的，所以不能实现display的渐变 */
+				/* 要使二级菜单的出现与消失有渐变效果可以用height代替display */
+				/* height初始值设为零，并设置overflow: hidden;属性达到元素消失效果 */
+				transition: height .5s linear;
+				overflow: hidden;
+				background-color: #fff;
+			}
+			.nav .navTexts>li .secMenu>li{
+				width: 200px;
+				height: 50px;
+				text-align: center;
+				line-height: 50px;
+				color: gray;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="nav">
+			<ul class="navTexts">
+				<li >
+					<a href="" class="highLight">首页</a>
+					<ul class="secMenu">
+						<li>公司简介1</li>
+						<li>产品列表</li>
+						<li>其他相关</li>
+					</ul>
+				</li>
+				<li>
+					<a href="" >产品</a>
+					<ul class="secMenu">
+						<li>公司简介2</li>
+						<li>产品列表</li>
+						<li>其他相关</li>
+					</ul>
+				</li>
+				<li>
+					<a href="" >客服</a>
+					<ul class="secMenu">
+						<li>公司简介3</li>
+						<li>产品列表</li>
+						<li>其他相关</li>
+					</ul>
+				</li>
+				<li>
+					<a href="" >关于</a>
+					<ul class="secMenu">
+						<li>公司简介4</li>
+						<li>产品列表</li>
+						<li>其他相关</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		
+		<script type="text/javascript">
+			//排他法
+			var liList = document.querySelectorAll('.nav .navTexts>li a');
+			var ulNode = document.querySelector('.nav .navTexts');
+			var secMenu = document.querySelectorAll(".nav .navTexts>li .secMenu");
+			
+			for(var i = 0; i < liList.length; i++){//循环拿到数组中的每一个li
+				liList[i].index = i;//在liList[i]这个对象中添加index属性记录当前i的值，为此对象内部对象或数组调用
+				liList[i].onmouseenter = function(){//给每一个li添加一个鼠标移入触发事件的方法，但此方法还未执行，鼠标移入的时候才会执行
+					for(var j = 0; j < liList.length; j++){
+						// liList[j].style.backgroundColor = '#fff';
+						liList[j].className = '';
+						secMenu[j].style.height = '0';//排他法去掉所有二级菜单，再在下面实现当前元素对应的
+						secMenu[j].style.zIndex = '1'
+					}
+					this.className = 'highLight';//用this只对当前移入的这一个有效,此this指向鼠标移入的这个li
+					secMenu[this.index].style.height = '150px';//必须为数值才有渐变效果，auto没有渐变效果
+					secMenu[this.index].style.zIndex = '99';
+				}
+				// liList[i].onmouseleave = function(){
+				// 	secMenu[this.index].style.display = 'none';
+				// }
+				var a = liList[i].index;
+				
+			}
+			
+			ulNode.onmouseleave = function(){// 移出ul导航恢复原样
+				for(var j = 0; j < liList.length; j++){
+					liList[j].className = '';
+					secMenu[j].style.height = '0';
+				}
+				// secMenu[liList[i].].style.display = 'none';
+				// liList[0].className = 'highLight';//给第一个导航加移入样式
+			}
+			
+			//给每一个li都加移入移出事件
+			// var liList = document.querySelectorAll('li');
+			// var ulNode = document.querySelector('.navTexts');
+			
+			// for(var i = 0; i < liList.length; i++){//循环拿到数组中的每一个li
+			// 	liList[i].onmouseenter = function(){//给每一个li添加一个鼠标移入触发事件的方法，但此方法还未执行，鼠标移入的时候才会执行
+			// 		// this.style.backgroundColor = 'deepskyblue';//用this只对当前移入的这一个有效,此this指向鼠标移入的这个li
+			// 		// this.style.color = '#fff';
+			// 		this.className = 'highLight';
+			// 	}
+			// 	liList[i].onmouseleave = function(){//给每一个li添加一个鼠标移入触发事件的方法，但此方法还未执行，鼠标移入的时候才会执行
+			// 		// this.style.backgroundColor = 'transparent';//用this只对当前移入的这一个有效,此this指向鼠标移入的这个li
+			// 		// this.style.color = '#000';
+			// 		this.className = '';
+			// 	}
+			// }
+			
+		</script>
+	</body>
+</html>

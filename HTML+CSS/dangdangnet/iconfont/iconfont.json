@@ -1,0 +1,44 @@
+{
+  "id": "2181631",
+  "name": "meitu",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "17445305",
+      "name": "取 消",
+      "font_class": "quxiao",
+      "unicode": "e619",
+      "unicode_decimal": 58905
+    },
+    {
+      "icon_id": "2972356",
+      "name": "登录",
+      "font_class": "denglu",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "6353166",
+      "name": "菜单",
+      "font_class": "menu-two",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
+      "icon_id": "14264859",
+      "name": "用户",
+      "font_class": "yonghu",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "17743130",
+      "name": "搜索",
+      "font_class": "sousuo",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    }
+  ]
+}
