@@ -41,43 +41,118 @@
   -->
 
   <script>
-    new Promise((resolve, reject) => {
-        setTimeout(() => {
-            // resolve(1)
-            reject(2)
-        }, 1000);
-    }).then(value => {
-        console.log('onResolved()', value)
-    }/* , reason => {
-        console.log('onRejected()', reason)
-    } */).catch(reason => {
-        console.log('onRejected2()', reason)
-    })
+      const promise = new Promise((resolve,reject)=>{
+          setTimeout(() => {
+            //   resolve('成功')
+            //   reject('失败')
+            const time = Date.now()
+            //     3.1) 如果成功了, 调用resolve(), 指定成功的value, 变为resolved状态
+            if (time%2 == 1) {
+                resolve('成功的数据' + time)//括号内的内容为value
+            } else {//     3.2) 如果失败了, 调用reject(), 指定失败的reason, 变为rejected状态
+                reject('失败的数据' + time)//括号内的内容为reason
+            }
+          }, 1000);
+      })
+      
+      promise.then(
+        // (value,reason)=>{//错误写法，
+        //   console.log (value);
+        //   console.log (reason);
+        // }
 
-    /* 创建一个value值为3的promise对象 */
-    const p1 = new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(3)
-        }, 1000);
-    })
-    const p2 = Promise.resolve(5)
-    const p3 = Promise.reject(4)
-    p1.then(value => console.log('p1 value', value))
-    p2.then(value => console.log('p2 value', value))
-    p3.catch(reason => console.log('p3 value', reason))
+        (value)=>{//正确写法，只能成功调用成功回调函数，失败调用失败函数
+            console.log (value);
+        },(reason)=>{
+            console.log (reason);
+        }
+      )
+    //   .catch((reason)=>{
+    //       console.log (reason);
+    //   })
 
-    // const p4 = Promise.all([p1, p2, p3])
-    // const p4 = Promise.all([p1, p2])
-    // p4.then(
-    //     values => console.log('p4 all onResolved()', values), // 数据的顺序与promise数组顺序一致
-    //     reason => console.log('p4 all onRejected()', reason),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //         // resolve(1)
+    //         reject(2)
+    //     }, 1000);
+    // }).then(value => {
+    //     console.log('onResolved()', value)
+    // }/* , reason => {
+    //     console.log('onRejected()', reason)
+    // } */).catch(reason => {
+    //     console.log('onRejected2()', reason)
+    // })
+
+    // /* 创建一个value值为3的promise对象 */
+    // const p1 = new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //         resolve(3)
+    //     }, 1000);
+    // })
+    // const p2 = Promise.resolve(5)
+    // const p3 = Promise.reject(4)
+    // p1.then(value => console.log('p1 value', value))
+    // p2.then(value => console.log('p2 value', value))
+    // p3.catch(reason => console.log('p3 value', reason))
+
+    // // const p4 = Promise.all([p1, p2, p3])
+    // // const p4 = Promise.all([p1, p2])
+    // // p4.then(
+    // //     values => console.log('p4 all onResolved()', values), // 数据的顺序与promise数组顺序一致
+    // //     reason => console.log('p4 all onRejected()', reason),
+    // // )
+
+    // const p5 = Promise.race([p1, p3, p2])
+    // p5.then(
+    //     value => console.log('p5 race onResolved()', value),
+    //     reason => console.log('p5 race onRejected()', reason),
     // )
-
-    const p5 = Promise.race([p1, p3, p2])
-    p5.then(
-        value => console.log('p5 race onResolved()', value),
-        reason => console.log('p5 race onRejected()', reason),
-    )
 
 
   </script>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 使用Promise封装异步ajax请求 */
+
+        const url = 'http://localhost:3000'
+        function myAsyncFunction(url) {
+          return new Promise((resolve, reject) => {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", url);
+            xhr.onload = () => resolve(JSON.parse(xhr.responseText));  // 成功的回调
+            xhr.onerror = () => reject(xhr.statusText); // 出错的回调
+            xhr.send();
+          });
+        };
+    
+        // myAsyncFunction('https://api.apiopen.top/getJoke?page=1&count=2&type=video')
+        myAsyncFunction('https://api.apiopen.top/getJoke2?page=1&count=2&type=video')
+          .then(
+            value => {
+              console.log('成功了', value)
+            },
+            reason => {
+              console.log('失败了', reason)
+            }
+          )
+        
+      </script> -->
+</body>
+</html>

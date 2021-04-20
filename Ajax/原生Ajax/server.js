@@ -1,24 +1,22 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
 
 //引入中间件使response.body能够生效
-app.use(express.urlencoded({extended: true}))
-
+app.use(express.urlencoded({extended: true}));
 //暴露静态资源
-app.use(express.static(__dirname + '/public'))
+app.use(express.static(__dirname + '/public'));
 
 // app.use('/',(req,res)=>{
 //     res.send('ok')
 // })
 app.use('/ajax_get',(req,res)=>{
     console.log(req.query);
-    res.send('get')
-})
-
+    res.send('get');
+});
 app.use('/ajax_post',(req,res)=>{
     console.log(req.body);
-    res.send('post')
-})
+    res.send('post');
+});
 
 app.listen(3000,(err)=>{
     if(!err){
@@ -29,4 +27,4 @@ app.listen(3000,(err)=>{
     }else{
         console.log('连接失败');
     }
-})
+});
